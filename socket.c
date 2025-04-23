@@ -44,7 +44,7 @@ int create_server_socket(int port_number, const char* ip_address, int max_connec
       return -1;
     }
     if (bind_result < 0) {
-      perror("Failed to bind");
+      perror("Failed to bind socket");
       int shutdown_result = shutdown(socketFD, SHUT_RDWR);
       if (shutdown_result == 0) {
         close(socketFD);
