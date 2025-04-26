@@ -1,7 +1,12 @@
 #include <openssl/err.h>
 #include <openssl/ssl.h>
 #include <stdlib.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <unistd.h>
 #include "socket.h"
+#include "string.h"
 #define PORT 4443
 int main (void) {
     // Set up SSL
@@ -49,6 +54,23 @@ int main (void) {
     inet_ntop(AF_INET, &client_addr.sin_addr, client_ip, INET_ADDRSTRLEN);
     printf("Client connected from %s:%d\n", client_ip, ntohs(client_addr.sin_port));
 
+    char buffer[1024];
+    int bytes_received = SSL_read(ssl, buffer, 1024);
+    if (bytes_received < 0) {
+      perror("Failed to receive data");
+      exit(EXIT_FAILURE);
+    }
+    buffer[bytes_received] = '\0'; // Terminate string
+
+    // GET method
+    if (strncmp(buffer, "GET ", 4) == 0) {
+
+    }
+
+    // POST method
+    else if (strncmp(buffer, "POST ", 4) == 0) {
+
+    }
     // Free up and close allocated memory and file descriptors
     SSL_shutdown(ssl);
     SSL_free(ssl);

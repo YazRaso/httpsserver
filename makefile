@@ -1,8 +1,9 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -g
-LDFLAGS = -lssl -lcrypto
+# NB: The file path for OpenSSL may be different for you!
+CFLAGS = -Wall -Wextra -g -I/opt/homebrew/Cellar/openssl@3/3.4.1/include
+LDFLAGS = -L/opt/homebrew/Cellar/openssl@3/3.4.1/lib -lssl -lcrypto
 
-SRCS = socket.c socket.c
+SRCS = ssl_server.c socket.c
 OBJS = $(SRCS:.c=.o)
 TARGET = server
 
@@ -14,9 +15,7 @@ $(TARGET): $(OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: clean rebuild
-
 clean:
 	rm -f $(OBJS) $(TARGET)
 
-rebuild: clean all
+.PHONY: all clean

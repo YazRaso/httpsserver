@@ -35,7 +35,7 @@ int create_server_socket(int port_number, const char* ip_address, int max_connec
         }
         return -1;
     }
-    int bind_result = bind(socketFD, &server_address, sizeof(server_address));
+    int bind_result = bind(socketFD, (const struct sockaddr *)(&server_address), sizeof(server_address));
     int listen_result = listen(socketFD, max_connection_requests);
     // Error handling
 
