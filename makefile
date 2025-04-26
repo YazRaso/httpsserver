@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -g
 LDFLAGS = -lssl -lcrypto
 
-SRCS = main.c socket.c
+SRCS = socket.c socket.c
 OBJS = $(SRCS:.c=.o)
 TARGET = server
 
