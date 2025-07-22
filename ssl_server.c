@@ -57,6 +57,8 @@ int main(void) {
             if (end_of_request) {
                 *end_of_request = '\0';
             }
+            const char *response = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nHello from SSL server!";
+            SSL_write(ssl, response, strlen(response));
         } else if (strncmp(buffer, "POST ", 5) == 0) {
             printf("Handling POST request...\n");
 
