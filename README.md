@@ -20,4 +20,9 @@ Simple HTTPS server implemented in C using OpenSSL and BSD sockets.
 ## Build
 
 ```sh
-gcc -o https_server main.c -lssl -lcrypto
+make
+```
+
+## Run
+
+./server
